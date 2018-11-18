@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=10">
+    <title>施工管理</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="{{url_for('static',filename='bootstrap/css/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/ionicons.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/AdminLTE.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/skins/_all-skins.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='vince/css/vince.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='vince/biao/css/font-awesome.min.css')}}">
+    <!--[if lt IE 9]>
+    <script src="{{url_for('static',filename='dist/js/html5shiv.min.js')}}"></script>
+    <script src="{{url_for('static',filename='dist/js/respond.min.js')}}"></script>
+    <![endif]-->
+    {% import "ui/page.html" as pg %}
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <header class="main-header">
+        <a href="#" class="logo">
+      <span class="logo-mini">
+	  <img src="{{url_for('static',filename='vince/images/v01.png')}}">
+	  </span>
+            <span class="logo-lg"><img src="{{url_for('static',filename='vince/images/v01.png')}}"></span>
+        </a>
+        <nav class="navbar navbar-static-top">
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button"></a>
+            <span class="all_title">物联网平台</span>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="{{url_for('static',filename='dist/img/user2-160x160.jpg')}}" class="user-image"
+                                 alt="User Image">
+                            <span class="hidden-xs">管理员</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="user-header">
+                                <img src="{{url_for('static',filename='dist/img/user2-160x160.jpg')}}"
+                                     class="img-circle" alt="User Image">
+                                <p>
+                                    姓名：管理员
+                                    <small>部门：管理部</small>
+                                </p>
+                            </li>
+                            <li class="user-footer">
+                                <div class="pull-right">
+                                    <a href="{{url_for('auth.login')}}" class="btn btn-default btn-flat">退出系统</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="{{url_for('static',filename='dist/img/user2-160x160.jpg')}}" class="img-circle"
+                         alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p>当前用户：管理员</p>
+                    <p class="menu_time">
+                        <span id=localtime style=" font-size:10px;  right: 30px; top:-20px; "></span></p>
+                </div>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="header">菜单 MENU</li>
+                <li>
+                    <a href="{{url_for('main.gczym',item_id=item_id)}}">
+                        <i class="fa fa-home"></i> <span>工程主页面</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('main.gjls',item_id=item_id)}}">
+                        <i class="fa fa-bell"></i> <span>告警历史</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="{{url_for('main.sggl',item_id=item_id,page=1)}}">
+                        <i class="fa fa-print"></i> <span>施工管理</span>
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-sliders"></i>
+                        <span>设备管理</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{url_for('main.jietiaoyi',item_id=item_id)}}"><i class="fa fa-bookmark"></i>
+                            解调仪</a></li>
+                        <li><a href="{{url_for('main.dianluban',item_id=item_id)}}"><i class="fa fa-bookmark"></i>
+                            电路板</a></li>
+                        <li><a href="{{url_for('main.shexiangtou',item_id=item_id)}}"><i class="fa fa-bookmark"></i> 摄像头</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{{url_for('main.gcsz',item_id=item_id)}}">
+                        <i class="fa fa-gears"></i> <span>工程设置</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </aside>
+    <div class="content-wrapper">
+        <section class="content-header">
+            <ol class="breadcrumb">
+                <li><a href="{{url_for('auth.indexofsupermanager')}}"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li class="active">工程主页面</li>
+            </ol>
+        </section>
+        <div class="content qqq">
+            <div class="yjgl">
+                <div class="ssjc_right_up">
+                    <div class="nei">
+                        <div class="sbaz_table">
+                            <p style="margin-left:60%">
+                                施工记录信息
+                                <a href="{{url_for('main.sggl_tzsg',item_id=item_id)}}" class="shzclick"
+                                   style="text-decoration:none;">通知施工</a>
+                                <a href="{{url_for('main.sggl_tjjl',item_id=item_id)}}" class="chkclick"
+                                   style="text-decoration:none;">添加记录</a>
+                                <a href="{{url_for('main.sggl_staff',item_id=item_id)}}" class="editclick"
+                                   style="text-decoration:none;width: 70px; height: 25px; background:#c87f0a; cursor: pointer; color: #FFFFFF; border: none; border-radius:3px ;">施工人员信息</a>
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="ssjc_right_bottom">
+                        <div class="nei">
+                            <p>工程<a id="itemid">{{item_id}}</a>施工表</p>
+                            <div class="ssjc_rub_table">
+                                <table class="tj_table" border="0">
+                                    <thead>
+                                    <tr>
+                                        <td>编号</td>
+                                        <td>通知时间</td>
+                                        <td>完成时间</td>
+                                        <td>施工人员</td>
+                                        <td>备注信息</td>
+                                        <td>修改</td>
+                                    </tr>
+
+                                    </thead>
+                                    <tbody>
+                                    {% for v in page_data.items %}
+                                    <tr>
+                                        <td id="sgid">{{v.id}}</td>
+                                        <td>{{v.notice_time}}</td>
+                                        <td>{{v.notice_comp}}</td>
+                                        <td>{{page_data2.staff_name}}</td>
+                                        <td>{{v.notice_remark}}</td>
+                                        <td>
+                                            <!--<button class="shzclick">修改</button>-->
+                                            <a href="{{url_for('main.sggl_edit',id=v.id,item_id=item_id)}}"
+                                               class="shzclick"
+                                               style="text-decoration:none;">修改</a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+
+                                </table>
+                                <div class="t_fanye">
+                                    {{ pg.page(page_data,'main.sggl',item_id=item_id) }}
+                                </div>
+
+                            </div>
+                            <div class="cheng_ershi"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+            <b></b>
+        </div>
+        <strong>Copyright &copy; 2018</strong>
+    </footer>
+    <div class="control-sidebar-bg"></div>
+</div>
+
+<!--<script>-->
+<!--$(document).ready(function () {-->
+<!--$('.shzclick').click(function () {-->
+<!--// var item_id=$("#itemid").val();-->
+<!--var itemid = document.getElementById("itemid");-->
+<!--item_id = itemid.innerHTML;-->
+<!--// alert(item_id);-->
+<!--var sensor = document.getElementById("sensor");-->
+<!--var sensor_index = sensor.selectedIndex;-->
+<!--var sensor_id = sensor[sensor_index].value;//这三句话是获取option中的值-->
+<!--var url = "/main/item_edit/" + sensor_id + "/" + item_id + "/";-->
+<!--window.location.href = url;-->
+<!--// alert(sensor_id);-->
+
+<!--});-->
+
+<!--})-->
+<!--</script>-->
+
+
+<script type="text/javascript" src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/echarts.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/china.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/vue.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/map.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/times.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/DTU.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/PLC.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/online.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/industry.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/data.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='js/index.js') }}"></script>
+<!--弹出框定义结束-->
+
+
+<script type="text/javascript" src="{{url_for('static',filename='js/times.js')}}"></script>
+<script src="{{url_for('static',filename='plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
+<script src="{{url_for('static',filename='bootstrap/js/bootstrap.min.js')}}"></script>
+<script src="{{url_for('static',filename='dist/js/app.min.js')}}"></script>
+<script src="{{url_for('static',filename='dist/js/demo.js')}}"></script>
+<script src="{{url_for('static',filename='vince/js/nicescroll.js')}}"></script>
+<script src="{{url_for('static',filename='vince/js/demo.js')}}"></script>
+<script src="{{url_for('static',filename='vince/datapick/js/moment.js')}}"></script>
+<script src="{{url_for('static',filename='vince/datapick/js/daterangepicker.js')}}"></script>
+<script type="text/javascript">
+    var myChart1 = echarts.init(document.getElementById('sss'));
+    option1 = {
+        series: [{data: [247, 179]}]
+    };
+    myChart1.setOption(option1);
+</script>
+</body>
+</html>

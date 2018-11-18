@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <div style="height:100%;width:20%">
+        <ul type="none">
+            <li style="float:left;margin-left: 5px">
+                <a href="{{ url_for('auth.indexofsupermanager') }}" style="text-decoration:none">
+						<span style="color:#FFFFFF">
+							首页
+						</span>
+                </a>
+            </li>
+            <li style="float:left;margin-left: 5px">
+                <a href="{{ url_for('main.usermanage')}}" style="text-decoration:none">
+						<span style="color:#FFFFFF">
+							用户管理
+						</span>
+                </a>
+            </li>
+            <li style="float:left;margin-left: 5px">
+                <a href="{{url_for('auth.login')}}" style="text-decoration:none">
+							<span style="color:#FFFFFF">
+								退出
+							</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <title>物联网平台主页</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}"/>
+    <script type="text/javascript" src="{{url_for('static',filename='js/jquery-1.8.0.min.js')}}"></script>
+</head>
+<body>
+<header>物联网平台<span id=localtime style=" font-size:14px; position: absolute; right: 30px; top:-20px; "></span>
+</header>
+
+<!--工程添加-->
+<form role="form" method="post" enctype="multipart/form-data">
+
+    <!--消息部分-->
+    {% for msg in get_flashed_messages(category_filter=["ok"]) %}
+    <div class="alert-success" style="background-color:green;text-align: center;height:5%;width:80%;margin:auto;">
+        <h4>操作成功</h4>
+        <span class="pop-close1">(点此关闭)</span>
+        {{ msg }}
+    </div>
+    {% endfor %}
+    {% for msg in get_flashed_messages(category_filter=["err"]) %}
+    <div class="alert-dismissible" style="background-color:red;text-align: center;height:5%;width:80%;margin:auto;">
+        <h4>操作失败</h4>
+        <span class="pop-close2">（点此关闭）</span>
+        {{ msg }}
+    </div>
+    {% endfor %}
+
+    <!--表格部分 -->
+    <table class="panel-table" bordercolor="#0d48e0" border="1">
+        <thead bgcolor="#0e4ae0" align="center">
+        <tr height="40">
+            <th colspan="9"> 工程项目列表</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr class="aaa" style="font-size: 16px;" align="center">
+            <td>工程号</td>
+            <td>工程名称</td>
+            <td>工程地点</td>
+            <td>工程管理单位</td>
+            <td>工程时间</td>
+            <td>施工人员</td>
+            <td>联系方式</td>
+            <td>桥梁简图</td>
+            <td>操作</td>
+        </tr>
+        <tr class="aaa" style="font-size: 16px;" align="center">
+            <td>
+                <label for="input_item_id">{{form.item_id.label}}</label>
+                {{form.item_id}}
+                {% for err in form.item_id.errors %}
+                <div class="col-md-12">
+                    <font style="color:red">{{ err }}</font>
+                </div>
+                {% endfor %}
+            </td>
+            <td>
+                <label for="input_name">{{form.name.label}}</label>
+                {{form.name}}
+                {% for err in form.name.errors %}
+                <div class="col-md-12">
+                    <font style="color:red">{{ err }}</font>
+                </div>
+                {% endfor %}
+            </td>
+            <td>
+                <label for="input_location">{{form.location.label}}</label>
+                {{form.location}}
+                {% for err in form.location.errors %}
+                <div class="col-md-12">
+                    <font style="color:red">{{ err }}</font>
+                </div>
+                {% endfor %}
+            </td>
+            <td>
+                <label for="input_manager">{{form.manager.label}}</label>
+                {{form.manager}}
+                {% for err in form.manager.errors %}
+                <div class="col-md-12">
+                    <font style="color:red">{{ err }}</font>
+                </div>
+                {% endfor %}
+            </td>
+            <td>
+                <label for="input_time">{{form.time.label}}</label>
+                {{form.time}}
+                {% for err in form.time.errors %}
+                <div class="col-md-12">
+                    <font style="color:red">{{ err }}</font>
+                </div>
+                {% endfor %}
+            </td>
+            <td>
+                <label for="input_staff_name">{{form.staff_name.label}}</label>
+                {{form.staff_name}}
+                {% for err in form.staff_name.errors %}
+                <div class="col-md-12">
+                    <font style="color:red">{{ err }}</font>
+                </div>
+                {% endfor %}
+            </td>
+            <td>
+                <label for="input_staff_rel">{{form.staff_rel.label}}</label>
+                {{form.staff_rel}}
+                {% for err in form.staff_rel.errors %}
+                <div class="col-md-12">
+                    <font style="color:red">{{ err }}</font>
+                </div>
+                {% endfor %}
+            </td>
+            <!--<td><input type="file" onchange="jsReadFiles(this.files)"/></td>-->
+            <!--<td><input type="file" onchange="jsReadFiles(this.files)"/></td>-->
+            <td style=>
+                <label for="input_bridge">{{form.bridge.label}}</label>
+                {{form.bridge}}
+                {% for err in form.bridge.errors %}
+                <div class="col-md-12">
+                    <font style="color:red">{{ err }}</font>
+                </div>
+                {% endfor %}
+            </td>
+            <td>
+                {{form.csrf_token}}
+                {{form.submit}}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</form>
+
+<script>
+    $(document).ready(function () {
+        $('.pop-close1').click(function () {
+            $('.alert-success').hide();
+        });
+        $('.pop-close2').click(function () {
+            $('.alert-dismissible').hide();
+        });
+    })
+
+</script>
+
+<script type="text/javascript" src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/echarts.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/china.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/vue.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/map.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/times.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/DTU.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/PLC.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/online.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/industry.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/data.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='js/index.js') }}"></script>
+</body>
+</html>

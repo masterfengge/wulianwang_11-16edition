@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=10">
+    <title>电路板</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="{{url_for('static',filename='bootstrap/css/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/ionicons.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/AdminLTE.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/skins/_all-skins.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='vince/css/vince.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='vince/biao/css/font-awesome.min.css')}}">
+    <!--[if lt IE 9]>
+    <script src="{{url_for('static',filename='dist/js/html5shiv.min.js')}}"></script>
+    <script src="{{url_for('static',filename='dist/js/respond.min.js')}}"></script>
+    <![endif]-->
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <header class="main-header">
+        <a href="#" class="logo">
+      <span class="logo-mini">
+	  <img src="{{url_for('static',filename='vince/images/v01.png')}}">
+	  </span>
+            <span class="logo-lg"><img src="{{url_for('static',filename='vince/images/v01.png')}}"></span>
+        </a>
+        <nav class="navbar navbar-static-top">
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button"></a>
+            <span class="all_title">物联网平台</span>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="{{url_for('static',filename='dist/img/user2-160x160.jpg')}}" class="user-image"
+                                 alt="User Image">
+                            <span class="hidden-xs">管理员</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="user-header">
+                                <img src="{{url_for('static',filename='dist/img/user2-160x160.jpg')}}"
+                                     class="img-circle" alt="User Image">
+                                <p>
+                                    姓名：管理员
+                                    <small>部门：管理部</small>
+                                </p>
+                            </li>
+                            <li class="user-footer">
+                                <div class="pull-right">
+                                    <a href="{{url_for('auth.login')}}" class="btn btn-default btn-flat">退出系统</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="{{url_for('static',filename='dist/img/user2-160x160.jpg')}}" class="img-circle"
+                         alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p>当前用户：管理员</p>
+                    <p class="menu_time">
+                        <span id=localtime style=" font-size:10px;  right: 30px; top:-20px; "></span></p>
+                </div>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="header">菜单 MENU</li>
+                <li>
+                    <a href="{{url_for('main.gczym',item_id=item_id)}}">
+                        <i class="fa fa-home"></i> <span>工程主页面</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('main.gjls',item_id=item_id)}}">
+                        <i class="fa fa-bell"></i> <span>告警历史</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('main.sggl',item_id=item_id,page=1)}}">
+                        <i class="fa fa-print"></i> <span>施工管理</span>
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-sliders"></i>
+                        <span>设备管理</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{url_for('main.jietiaoyi',item_id=item_id)}}"><i class="fa fa-bookmark"></i>
+                            解调仪</a></li>
+                        <li  class="active"><a href="{{url_for('main.dianluban',item_id=item_id)}}"><i class="fa fa-bookmark"></i>
+                            电路板</a></li>
+                        <li><a href="{{url_for('main.shexiangtou',item_id=item_id)}}"><i class="fa fa-bookmark"></i> 摄像头</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{{url_for('main.gcsz',item_id=item_id)}}">
+                        <i class="fa fa-gears"></i> <span>工程设置</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </aside>
+    <div class="content-wrapper">
+        <section class="content-header">
+            <ol class="breadcrumb">
+                <li><a href="{{url_for('auth.indexofsupermanager')}}"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li class="active">工程主页面</li>
+            </ol>
+        </section>
+        <div class="content qqq">
+            <div class="yjgl">
+                <div class="ssjc_right_up">
+                    <div class="nei">
+
+                        <div class="sbaz_table">
+                            <p>
+                                电路板状态查看
+                            </p>
+                        </div>
+                    </div>
+                    <div class="ssjc_right_bottom">
+                        <div class="nei">
+                            <p>数据列表</p>
+                            <div class="ssjc_rub_table">
+                                <table class="tj_table" border="0">
+                                    <thead>
+                                    <tr>
+                                        <td>工作状态</td>
+                                        <td>温度</td>
+                                        <td>上电时间</td>
+                                        <td>断电时间</td>
+                                    </tr>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>正常</td>
+                                        <td>30摄氏度</td>
+                                        <td>2018-10-1 10：20</td>
+                                        <td>50min</td>
+                                    </tr>
+                                    <tr>
+                                        <td>正常</td>
+                                        <td>30摄氏度</td>
+                                        <td>2018-10-1 10：20</td>
+                                        <td>50min</td>
+                                    </tr>
+                                    <tr>
+                                        <td>正常</td>
+                                        <td>30摄氏度</td>
+                                        <td>2018-10-1 10：20</td>
+                                        <td>50min</td>
+                                    </tr>
+                                    <tr>
+                                        <td>正常</td>
+                                        <td>30摄氏度</td>
+                                        <td>2018-10-1 10：20</td>
+                                        <td>50min</td>
+                                    </tr>
+                                    <tr>
+                                        <td>正常</td>
+                                        <td>30摄氏度</td>
+                                        <td>2018-10-1 10：20</td>
+                                        <td>50min</td>
+                                    </tr>
+                                    <tr>
+                                        <td>正常</td>
+                                        <td>30摄氏度</td>
+                                        <td>2018-10-1 10：20</td>
+                                        <td>50min</td>
+                                    </tr>
+
+                                    </tbody>
+
+                                </table>
+                                <div class="t_fanye">
+                                    <span class="upten"></span>
+                                    <span class="up"></span>
+                                    <span class="split"></span>
+                                    <span class="page_info_one">第 1 / 1 页</span>
+                                    <span class="split"></span>
+                                    <span class="dowm"></span>
+                                    <span class="downten"></span>
+                                    <span class="page_info_two">页记录数 15</span>
+                                    <span class="page_info_three">当前1-1条记录，共1条记录</span>
+                                    <div class="clear"></div>
+                                </div>
+
+                            </div>
+                            <div class="cheng_ershi"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+            <b></b>
+        </div>
+        <strong>Copyright &copy; 2018</strong>
+    </footer>
+    <div class="control-sidebar-bg"></div>
+</div>
+
+<script type="text/javascript" src="{{url_for('static',filename='js/times.js')}}"></script>
+<script src="{{url_for('static',filename='plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
+<script src="{{url_for('static',filename='bootstrap/js/bootstrap.min.js')}}"></script>
+<script src="{{url_for('static',filename='dist/js/app.min.js')}}"></script>
+<script src="{{url_for('static',filename='dist/js/demo.js')}}"></script>
+<script src="{{url_for('static',filename='vince/js/nicescroll.js')}}"></script>
+<script src="{{url_for('static',filename='vince/js/demo.js')}}"></script>
+<div id="sss" style="display:none;height:200px;width:200px;"></div>
+<script src="{{url_for('static',filename='vince/js/echarts.min.js')}}"></script>
+<script type="text/javascript">
+    var myChart1 = echarts.init(document.getElementById('sss'));
+    option1 = {
+        series: [{data: [247, 179]}]
+    };
+    myChart1.setOption(option1);
+</script>
+</body>
+</html>

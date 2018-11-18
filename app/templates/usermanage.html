@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<div style="height:100%;width:20%">
+			<ul type="none">
+				<li style="float:left;margin-left: 5px">
+					 <a href="{{ url_for('auth.indexofsupermanager') }}" style="text-decoration:none">
+						<span style="color:#FFFFFF">
+							首页
+						</span>
+                </a>
+            </li>
+            <li style="float:left;margin-left: 5px">
+                <a href="{{ url_for('main.usermanage')}}" style="text-decoration:none">
+						<span style="color:#FFFFFF">
+							用户管理
+						</span>
+                </a>
+            </li>
+            <li style="float:left;margin-left: 5px">
+                <a href="{{url_for('auth.login')}}" style="text-decoration:none">
+							<span style="color:#FFFFFF">
+								退出
+							</span>
+						</a>
+				</li>
+			</ul>
+			</div>
+		<title>物联网平台主页</title>
+		<link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}"/>
+    <script type="text/javascript" src="{{url_for('static',filename='js/jquery-1.8.0.min.js')}}"></script>
+	</head>
+	<body>
+		<header>物联网平台<span id=localtime style=" font-size:14px; position: absolute; right: 30px; top:-20px; "></span>
+		</header>
+		<div id="content">
+			<div class="content_center">
+				<div class="center_bot">
+                 <div class="yonghuguanli" style="float:right;margin-right:4%"><p><input type="text" placeholder="输入用户名" class="carNo_input"><input type="button" class="find_but">
+<button class="b1 click_pop">添加用户</button></p></div>
+					<table class="panel-table"bordercolor="#0d48e0" border="1">
+                        <thead bgcolor="#0e4ae0" align="center" >
+                        <tr height="40">
+                            <th colspan="6"><img src="{{url_for('static',filename='img/icon04.png')}}" /> 用户列表</th>
+                        </tr>
+                       
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+				</div>
+			</div>
+		</div>
+		<!--遮罩层-->
+		<div class="bgPop"></div>
+		<!--弹出框-->
+		<div class="pop">
+		    <div class="pop-top">
+		        修改用户
+		        <span class="pop-close">Ｘ</span>
+		    </div>
+		    <div class="pop-content">
+				<div class="creatuser1" style="width:25%;height:100%;float:left">
+					<div class="creatuser1_1" style="height:100%;margin-left:5%;margin-top:30%;margin-bottom: 30%;background-color: peachpuff;">
+					<br><br>
+				<input type="text" placeholder="用户名" class="carNo_input" style="margin-top:15%;margin-left: 5%">
+					<br><br>
+				<input type="text" placeholder="密码" class="carNo_input" style="margin-top:15%;margin-left: 5%">
+					<br><br>
+				<input type="text" placeholder="负责工程" class="carNo_input" style="margin-top:15%;margin-left: 5%">
+					<br><br>
+				<input type="text" placeholder="权限" class="carNo_input" style="margin-top:15%;margin-left: 5%">
+					<br><br>
+				<button class="b1 click_pop" style="margin-bottom:10%;margin-top:10%;margin-left: 60%">确定</button>
+			         </div>
+				</div>
+				<div class="creatuser2" style="width:75%;height:100%;float:left">
+					<div class="creatuser2_1" style="width:45%;height:80%;margin-left:5%;margin-top: 10%;margin-bottom: 10%;float:left;background-color: aquamarine">
+						<input type="text" placeholder="输入工程号" class="carNo_input" style="margin-left:15%">
+						<input type="button" class="find_but"> 
+						<br><br>
+						<li>
+							<a href="baidu.com">工程5</a>
+						</li>
+						<br><br>
+						<li>
+							<a href="baidu.com">工程1</a>
+						</li>
+						<br><br>
+						<li>
+							<a href="baidu.com">工程7</a>
+						</li>
+						<br><br>
+						<li>
+							<a href="baidu.com">工程3</a>
+						</li>
+						<br><br>
+					</div>
+					<div class="creatuser2_2" style="width:45%;height:80%;margin-left:5%;margin-top: 10%;margin-bottom: 10%;float:left;background-color:ghostwhite">
+						<br><br>
+						<li>
+							<a href="baidu.com">工程4</a>
+						</li>
+						<br><br>
+						<li>
+							<a href="baidu.com">工程3</a>
+						</li>
+						<br><br>
+						<li>
+							<a href="baidu.com">工程9</a>
+						</li>
+						<br><br>
+						<li>
+							<a href="baidu.com">工程9</a>
+						</li>
+						<br><br>
+						<button class="b1 click_pop" style="margin-top:20%;margin-left: 70%">确定</button>
+					</div>
+                </div>
+		    </div>
+		    <div class="pop-foot">
+		        <input type="button" value="确定" class="pop-cancel pop-close">
+		    </div>
+		</div>
+		<script>
+		    $(document).ready(function () {
+		        $('.pop-close').click(function () {
+		            $('.bgPop,.pop').hide();
+		        });
+		        $('.click_pop').click(function () {
+		            $('.bgPop,.pop').show();
+		        });
+		    })
+		
+		</script>
+		<!--遮罩层-->
+		<div class="bgPop2"></div>
+		<!--弹出框-->
+		<div class="pop2">
+		    <div class="pop-top">
+		        删除用户
+		        <span class="pop-close">Ｘ</span>
+		    </div>
+		    <div class="pop-content">
+		        <table class="panel-table" bordercolor="#deefff" border="1">
+                    <thead bgcolor="#10aaa5" align="center" >
+                        <tr height="38">
+                            <th>字段</th>
+                            <th>字段</th>
+                            <th>字段</th>
+                            <th>字段</th>
+                            <th>字段</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="aaa" style="font-size: 16px;" align="center" >
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr class="aaa" style="font-size: 16px;" align="center" >
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr class="aaa" style="font-size: 16px;" align="center" >
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    
+                    <tr class="aaa" style="font-size: 16px;" align="center" >
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    </tbody>
+                </table>
+		    </div>
+		    <div class="pop-foot">
+		        <input type="button" value="确定" class="pop-cancel pop-close">
+		    </div>
+		</div>
+		<script>
+		    $(document).ready(function () {
+		        $('.pop-close').click(function () {
+		            $('.bgPop2,.pop2').hide();
+		        });
+		        $('.click_pop2').click(function () {
+		            $('.bgPop2,.pop2').show();
+		        });
+		    })
+		
+		</script>
+		<!--遮罩层-->
+		<div class="bgPop3"></div>
+		<!--弹出框-->
+		<div class="pop3">
+		    <div class="pop-top">
+		        设置
+		        <span class="pop-close">Ｘ</span>
+		    </div>
+		    <div class="pop-content">
+		        设置
+		    </div>
+		    <div class="pop-foot">
+		        <input type="button" value="确定" class="pop-cancel pop-close">
+		    </div>
+		</div>
+		<script>
+		    $(document).ready(function () {
+		        $('.pop-close').click(function () {
+		            $('.bgPop3,.pop3').hide();
+		        });
+		        $('.click_pop3').click(function () {
+		            $('.bgPop3,.pop3').show();
+		        });
+		    })
+		
+		</script>
+		<script type="text/javascript" src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/echarts.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/china.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/vue.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/map.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/times.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/DTU.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/PLC.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/online.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/industry.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/data.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='js/index.js') }}"></script>
+	</body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=10">
+    <title>告警历史</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="{{url_for('static',filename='bootstrap/css/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/ionicons.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/AdminLTE.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/skins/_all-skins.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='vince/css/vince.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='vince/biao/css/font-awesome.min.css')}}">
+    <!--[if lt IE 9]>
+    <script src="{{url_for('static',filename='dist/js/html5shiv.min.js')}}"></script>
+    <script src="{{url_for('static',filename='dist/js/respond.min.js')}}"></script>
+    <![endif]-->
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <header class="main-header">
+        <a href="#" class="logo">
+      <span class="logo-mini">
+	  <img src="{{url_for('static',filename='vince/images/v01.png')}}">
+	  </span>
+            <span class="logo-lg"><img src="{{url_for('static',filename='vince/images/v01.png')}}"></span>
+        </a>
+        <nav class="navbar navbar-static-top">
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button"></a>
+            <span class="all_title">物联网平台</span>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="{{url_for('static',filename='dist/img/user2-160x160.jpg')}}" class="user-image"
+                                 alt="User Image">
+                            <span class="hidden-xs">管理员</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="user-header">
+                                <img src="{{url_for('static',filename='dist/img/user2-160x160.jpg')}}"
+                                     class="img-circle" alt="User Image">
+                                <p>
+                                    姓名：管理员
+                                    <small>部门：管理部</small>
+                                </p>
+                            </li>
+                            <li class="user-footer">
+                                <div class="pull-right">
+                                    <a href="{{url_for('auth.login')}}" class="btn btn-default btn-flat">退出系统</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="{{url_for('static',filename='dist/img/user2-160x160.jpg')}}" class="img-circle"
+                         alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p>当前用户：管理员</p>
+                    <p class="menu_time">
+                        <span id=localtime style=" font-size:10px;  right: 30px; top:-20px; "></span></p>
+                </div>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="header">菜单 MENU</li>
+                <li>
+                    <a href="{{url_for('main.gczym',item_id=item_id)}}">
+                        <i class="fa fa-home"></i> <span>工程主页面</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="{{url_for('main.gjls',item_id=item_id)}}">
+                        <i class="fa fa-bell"></i> <span>告警历史</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('main.sggl',item_id=item_id,page=1)}}">
+                        <i class="fa fa-print"></i> <span>施工管理</span>
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-sliders"></i>
+                        <span>设备管理</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{url_for('main.jietiaoyi',item_id=item_id)}}"><i class="fa fa-bookmark"></i>
+                            解调仪</a></li>
+                        <li><a href="{{url_for('main.dianluban',item_id=item_id)}}"><i class="fa fa-bookmark"></i>
+                            电路板</a></li>
+                        <li><a href="{{url_for('main.shexiangtou',item_id=item_id)}}"><i class="fa fa-bookmark"></i> 摄像头</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{{url_for('main.gcsz',item_id=item_id)}}">
+                        <i class="fa fa-gears"></i> <span>工程设置</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </aside>
+    <div class="content-wrapper">
+        <section class="content-header">
+            <ol class="breadcrumb">
+                <li><a href="{{url_for('auth.indexofsupermanager')}}"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li class="active">工程主页面</li>
+            </ol>
+        </section>
+        <div class="content qqq">
+            <div class="yjgl">
+                <div class="ssjc_right_up">
+                    <div class="nei">
+                        <div class="ssjc_ru_title">
+                  <span class="left_ten">
+                    预警查询
+                  </span>
+                            <span class="float_right">
+                        <span class="tiaoshijian">
+                    开始时间：
+                    <input type="text" class="shi" id="xuanshi1" readonly value="2018-08-01">
+                    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
+                    <span class="tiaoshijian">
+                    结束时间：
+                    <input type="text" class="shi" id="xuanshi2" readonly value="2018-10-12">
+                    <i class="glyphicon glyphicon-calendar fa fa-calendar" style="left:86px;"></i></span>
+                                <!--<span>
+                                预警级别
+                                  <select   class="biaoti_select">
+                              <option value="甲级">甲级</option>
+                              <option value="乙级">乙级</option>
+                              <option value="丙级">丙级</option>
+                            </select>
+                                </span>-->
+                  <span>
+                  处理状态：
+                    <select class="biaoti_select" id="myselect">
+                <option value="1">处理完成</option>
+                <option value="2">待处理</option>
+              </select>
+                  </span>
+
+              <span class="right_ten">
+                    <input type="submit" value="查询" class="youcecha">
+                  </span>
+                  </span>
+                            <div class="clear"></div>
+                        </div>
+
+                    </div>
+                    <div class="ssjc_right_bottom">
+                        <div class="nei">
+                            <p>工程<span id="itemid">{{item_id}}</span>告警历史表</p>
+                            <div class="ssjc_rub_table">
+                                <table class="tj_table" border="0">
+                                    <thead>
+                                    <tr>
+                                        <td>编号</td>
+                                        <td>报警时间</td>
+                                        <td>传感器号</td>
+                                        <td>传感器</td>
+                                        <td>参考值</td>
+                                        <td>历史值</td>
+                                        <td>处理状态</td>
+                                        <td>短信发送情况</td>
+                                        <td>备注</td>
+                                        <td>操作</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for v in page_data.items %}
+                                    <tr>
+                                        <td>{{ v.id }}</td>
+                                        <td>{{ v.warn_time }}</td>
+                                        <td>{{ v.sensor_id }}</td>
+                                        <td>{{ v.sensor_type }}</td>
+                                        <td>{{ v.sensor_thre }}</td>
+                                        <td>{{ v.sensor_data }}</td>
+                                        <td>{{ v.warn_state }}</td>
+                                        <td>{{ v.warn_message }}</td>
+                                        <td>{{ v.warn_remark }}</td>
+                                        <td><a href="#">处理</a> | <a href="#">忽略</a></td>
+                                    </tr>
+                                    {% endfor %}
+                                    <tr class="gao xian"></tr>
+                                    </tbody>
+
+                                </table>
+                                <div class="t_fanye">
+                                    <span class="upten"></span>
+                                    <span class="up"></span>
+                                    <span class="split"></span>
+                                    <span class="page_info_one">第 1 / 1 页</span>
+                                    <span class="split"></span>
+                                    <span class="dowm"></span>
+                                    <span class="downten"></span>
+                                    <span class="page_info_two">页记录数 15</span>
+                                    <span class="page_info_three">当前1-1条记录，共1条记录</span>
+                                    <div class="clear"></div>
+                                </div>
+
+                            </div>
+                            <div class="cheng_ershi"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+            <b></b>
+        </div>
+        <strong>Copyright &copy; 2018</strong>
+    </footer>
+    <div class="control-sidebar-bg"></div>
+</div>
+<script type="text/javascript" src="{{url_for('static',filename='js/times.js')}}"></script>
+<script src="{{url_for('static',filename='plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
+<script src="{{url_for('static',filename='bootstrap/js/bootstrap.min.js')}}"></script>
+<script src="{{url_for('static',filename='dist/js/app.min.js')}}"></script>
+<script src="{{url_for('static',filename='dist/js/demo.js')}}"></script>
+<script src="{{url_for('static',filename='vince/js/nicescroll.js')}}"></script>
+<script src="{{url_for('static',filename='vince/js/demo.js')}}"></script>
+<script src="{{url_for('static',filename='vince/datapick/js/moment.js')}}"></script>
+<script src="{{url_for('static',filename='vince/datapick/js/daterangepicker.js')}}"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#xuanshi1').daterangepicker({singleDatePicker: true}, function (start, end, label) {
+            console.log(start.toISOString(), end.toISOString(), label);
+        });
+        $('#xuanshi2').daterangepicker({singleDatePicker: true}, function (start, end, label) {
+            console.log(start.toISOString(), end.toISOString(), label);
+        });
+        $('.youcecha').click(function () {
+            // var item_id=$("#itemid").val();
+            var itemid = document.getElementById("itemid");
+            item_id = itemid.innerHTML;
+
+            var start = document.getElementById("xuanshi1");
+            var starttime = start.value;
+            var end = document.getElementById("xuanshi2");
+            var endtime = end.value;
+
+
+            // alert(item_id);
+            var liebiao = document.getElementById("myselect");
+            var liebiao_index = liebiao.selectedIndex;
+            var zhuangtai = liebiao[liebiao_index].innerHTML;//这三句话是获取option中的值
+
+
+            var url = "/main/gjls_cx/" + zhuangtai + "/" + item_id + "/" + starttime + "/" + endtime + "/";
+            // var url = "/main/gjls_cx/" + zhuangtai + "/" + item_id + "/" ;
+
+            window.location.href = url;
+            // alert(sensor_id);
+
+        });
+
+    });
+</script>
+<script src="{{url_for('static',filename='vince/js/echarts.min.js')}}"></script>
+
+</body>
+</html>

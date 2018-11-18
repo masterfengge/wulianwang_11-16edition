@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=10">
+    <title>工程设置</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="{{url_for('static',filename='bootstrap/css/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/ionicons.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/AdminLTE.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/skins/_all-skins.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='vince/css/vince.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='vince/biao/css/font-awesome.min.css')}}">
+    <!--[if lt IE 9]>
+    <script src="{{url_for('static',filename='dist/js/html5shiv.min.js')}}"></script>
+    <script src="{{url_for('static',filename='dist/js/respond.min.js')}}"></script>
+    <![endif]-->
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <header class="main-header">
+        <a href="#" class="logo">
+      <span class="logo-mini">
+	  <img src="{{url_for('static',filename='vince/images/v01.png')}}">
+	  </span>
+            <span class="logo-lg"><img src="{{url_for('static',filename='vince/images/v01.png')}}"></span>
+        </a>
+        <nav class="navbar navbar-static-top">
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button"></a>
+            <span class="all_title">物联网平台</span>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="{{url_for('static',filename='dist/img/user2-160x160.jpg')}}" class="user-image"
+                                 alt="User Image">
+                            <span class="hidden-xs">管理员</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="user-header">
+                                <img src="{{url_for('static',filename='dist/img/user2-160x160.jpg')}}"
+                                     class="img-circle" alt="User Image">
+                                <p>
+                                    姓名：管理员
+                                    <small>部门：管理部</small>
+                                </p>
+                            </li>
+                            <li class="user-footer">
+                                <div class="pull-right">
+                                    <a href="{{url_for('auth.login')}}" class="btn btn-default btn-flat">退出系统</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="{{url_for('static',filename='dist/img/user2-160x160.jpg')}}" class="img-circle"
+                         alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p>当前用户：管理员</p>
+                    <p class="menu_time">
+                        <span id=localtime style=" font-size:10px;  right: 30px; top:-20px; "></span></p>
+                </div>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="header">菜单 MENU</li>
+                <li>
+                    <a href="{{url_for('main.gczym',item_id=item_id)}}">
+                        <i class="fa fa-home"></i> <span>工程主页面</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('main.gjls',item_id=item_id)}}">
+                        <i class="fa fa-bell"></i> <span>告警历史</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('main.sggl',item_id=item_id,page=1)}}">
+                        <i class="fa fa-print"></i> <span>施工管理</span>
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-sliders"></i>
+                        <span>设备管理</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{url_for('main.jietiaoyi',item_id=item_id)}}"><i class="fa fa-bookmark"></i>
+                            解调仪</a></li>
+                        <li><a href="{{url_for('main.dianluban',item_id=item_id)}}"><i class="fa fa-bookmark"></i>
+                            电路板</a></li>
+                        <li><a href="{{url_for('main.shexiangtou',item_id=item_id)}}"><i class="fa fa-bookmark"></i> 摄像头</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="active">
+                    <a href="{{url_for('main.gcsz',item_id=item_id)}}">
+                        <i class="fa fa-gears"></i> <span>工程设置</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </aside>
+    <div class="content-wrapper">
+        <section class="content-header">
+            <ol class="breadcrumb">
+                <li><a href="{{url_for('auth.indexofsupermanager')}}"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li class="active">工程主页面</li>
+            </ol>
+        </section>
+        <div class="content qqq">
+            <div class="yjgl">
+                <div class="ssjc_right_up">
+                    <div class="nei">
+
+                    </div>
+
+                    {% for msg in get_flashed_messages(category_filter=["ok"]) %}
+                    <div class="alert-success"
+                         style="background-color:green;text-align: center;height:5%;width:80%;margin:auto;">
+                        <h4>操作成功</h4>
+                        <span class="pop-close">(点此关闭)</span>
+                        {{ msg }}
+                    </div>
+                    {% endfor %}
+                    <div class="ssjc_right_bottom">
+                        <div class="nei">
+                            <p>数据列表</p>
+                            <div class="ssjc_rub_table">
+                                <form role="form" method="post"
+                                      action="{{ url_for('main.gcsz',item_id=item_id,item=item,staff=staff) }}"
+                                      enctype="multipart/form-data">
+                                    <table class="tj_table" border="0">
+                                        <thead>
+                                        <tr>
+                                            <td>工程名称</td>
+                                            <td>工程号</td>
+                                            <td>工程位置</td>
+                                            <td>使用单位</td>
+                                            <td>安装时间</td>
+                                            <td>工程负责人</td>
+                                            <td>工程负责人联系方式</td>
+                                            <td>工程桥梁简图</td>
+                                            <td>确认</td>
+                                        </tr>
+
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>{{item.item_name}}</td>
+                                            <td>{{item_id}}</td>
+                                            <td>{{item.item_loc}}</td>
+                                            <td>{{item.item_manager}}</td>
+                                            <td>{{item.item_starttime}}</td>
+                                            <td style="color: deepskyblue">
+                                                <label for="input_staff_name">{{form.staff_name.label}}</label>
+                                                {{form.staff_name(value=staff.staff_name)}}
+                                                {% for err in form.staff_name.errors %}
+                                                <div class="col-md-12">
+                                                    <font style="color:red">{{ err }}</font>
+                                                </div>
+                                                {% endfor %}
+                                            </td>
+                                            <td style="color: deepskyblue">
+                                                <label for="input_staff_rel">{{form.staff_rel.label}}</label>
+                                                {{form.staff_rel(value=staff.staff_phone)}}
+                                                {% for err in form.staff_rel.errors %}
+                                                <div class="col-md-12">
+                                                    <font style="color:red">{{ err }}</font>
+                                                </div>
+                                                {% endfor %}
+                                            </td>
+                                            <!--<td><input type="file" onchange="jsReadFiles(this.files)"/></td>-->
+                                            <!--<td><input type="file" onchange="jsReadFiles(this.files)"/></td>-->
+                                            <td style="color: deepskyblue">
+                                                <label for="input_bridge">{{form.bridge.label}}</label>
+                                                {{form.bridge}}
+                                                {% for err in form.bridge.errors %}
+                                                <div class="col-md-12">
+                                                    <font style="color:red">{{ err }}</font>
+                                                </div>
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {{form.csrf_token}}
+                                                {{form.submit}}
+                                            </td>
+                                        </tr>
+                                        <!--<script>-->
+                                        <!--function jsReadFiles(files) {-->
+                                        <!--if (files.length) {-->
+                                        <!--var file = files[0];-->
+                                        <!--var reader = new FileReader();//new一个FileReader实例-->
+                                        <!--if (/text+/.test(file.type)) {//判断文件类型，是不是text类型-->
+                                        <!--reader.onload = function () {-->
+                                        <!--$('body').append('<pre>' + this.result + '</pre>');-->
+                                        <!--}-->
+                                        <!--reader.readAsText(file);-->
+                                        <!--} else if (/image+/.test(file.type)) {//判断文件是不是imgage类型-->
+                                        <!--reader.onload = function () {-->
+                                        <!--$('body').append('<img src="' + this.result + '"/>');-->
+                                        <!--}-->
+                                        <!--reader.readAsDataURL(file);-->
+                                        <!--}-->
+                                        <!--}-->
+                                        <!--}-->
+                                        <!--</script>-->
+
+
+                                        </tbody>
+
+                                    </table>
+
+                                </form>
+                            </div>
+                            <div class="cheng_ershi"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+            <b></b>
+        </div>
+        <strong>Copyright &copy; 2018</strong>
+    </footer>
+    <div class="control-sidebar-bg"></div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $('.pop-close').click(function () {
+            $('.alert-success').hide();
+        });
+    });
+
+</script>
+
+<script type="text/javascript" src="{{url_for('static',filename='js/times.js')}}"></script>
+<script src="{{url_for('static',filename='plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
+<script src="{{url_for('static',filename='bootstrap/js/bootstrap.min.js')}}"></script>
+<script src="{{url_for('static',filename='dist/js/app.min.js')}}"></script>
+<script src="{{url_for('static',filename='dist/js/demo.js')}}"></script>
+<script src="{{url_for('static',filename='vince/js/nicescroll.js')}}"></script>
+<script src="{{url_for('static',filename='vince/js/demo.js')}}"></script>
+<div id="sss" style="display:none;height:200px;width:200px;"></div>
+<script src="{{url_for('static',filename='vince/js/echarts.min.js')}}"></script>
+<script type="text/javascript">
+    var myChart1 = echarts.init(document.getElementById('sss'));
+    option1 = {
+        series: [{data: [247, 179]}]
+    };
+    myChart1.setOption(option1);
+</script>
+</body>
+</html>

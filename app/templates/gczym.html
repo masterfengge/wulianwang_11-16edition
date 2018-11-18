@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=10">
+    <title>工程主页面</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="{{url_for('static',filename='bootstrap/css/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/ionicons.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/AdminLTE.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/skins/_all-skins.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='vince/css/vince.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='vince/biao/css/font-awesome.min.css')}}">
+    <!--[if lt IE 9]>
+    <script src="{{url_for('static',filename='dist/js/html5shiv.min.js')}}"></script>
+    <script src="{{url_for('static',filename='dist/js/respond.min.js')}}"></script>
+    <![endif]-->
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <header class="main-header">
+        <a href="#" class="logo">
+      <span class="logo-mini">
+	  <img src="{{url_for('static',filename='vince/images/v01.png')}}">
+	  </span>
+            <span class="logo-lg"><img src="{{url_for('static',filename='vince/images/v01.png')}}"></span>
+        </a>
+        <nav class="navbar navbar-static-top">
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button"></a>
+            <span class="all_title">物联网平台</span>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="{{url_for('static',filename='dist/img/user2-160x160.jpg')}}" class="user-image"
+                                 alt="User Image">
+                            <span class="hidden-xs">管理员</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="user-header">
+                                <img src="{{url_for('static',filename='dist/img/user2-160x160.jpg')}}"
+                                     class="img-circle" alt="User Image">
+                                <p>
+                                    姓名：管理员
+                                    <small>部门：管理部</small>
+                                </p>
+                            </li>
+                            <li class="user-footer">
+                                <div class="pull-right">
+                                    <a href="{{url_for('auth.login')}}" class="btn btn-default btn-flat">退出系统</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="{{url_for('static',filename='dist/img/user2-160x160.jpg')}}" class="img-circle"
+                         alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p>当前用户：管理员</p>
+                    <p class="menu_time">
+                        <span id=localtime style=" font-size:10px;  right: 30px; top:-20px; "></span></p>
+                </div>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="header">菜单 MENU</li>
+                <li class="active">
+                    <a href="{{url_for('main.gczym',item_id=item_id)}}">
+                        <i class="fa fa-home"></i> <span>工程主页面</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('main.gjls',item_id=item_id)}}">
+                        <i class="fa fa-bell"></i> <span>告警历史</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('main.sggl',item_id=item_id,page=1)}}">
+                        <i class="fa fa-print"></i> <span>施工管理</span>
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-sliders"></i>
+                        <span>设备管理</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{url_for('main.jietiaoyi',item_id=item_id)}}"><i class="fa fa-bookmark"></i>
+                            解调仪</a></li>
+                        <li><a href="{{url_for('main.dianluban',item_id=item_id)}}"><i class="fa fa-bookmark"></i>
+                            电路板</a></li>
+                        <li><a href="{{url_for('main.shexiangtou',item_id=item_id)}}"><i class="fa fa-bookmark"></i> 摄像头</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{{url_for('main.gcsz',item_id=item_id)}}">
+                        <i class="fa fa-gears"></i> <span>工程设置</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </aside>
+    <div class="content-wrapper" style="height: 100%;">
+        <section class="content-header">
+            <ol class="breadcrumb">
+                <li><a href="{{url_for('auth.indexofsupermanager')}}"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li class="active">工程主页面</li>
+            </ol>
+        </section>
+        <div class="content qqq" style="height:100%">
+            <div class="ssjc" style="height:100%">
+                <div class="row" style="height:100%">
+                    <div class="col-md-3 ssjc_left" style="height:100%">    <!--col-md-3的意思是，一共12列，这个占3列-->
+                        <div class="tianqi" style="height:30%;width:100%;"><img
+                                src="{{url_for('static',filename='vince/images/tianqi1.png')}}" alt="background"
+                                width="100%" height="100%"></div>
+                        <br>
+                        <div class="weizhi" style="height:30%;width:100%;"><img
+                                src="{{url_for('static',filename='vince/images/weizhi1.png')}}" alt="background"
+                                width="100%" height="100%"></div>
+                        <br>
+                        <div class="shijian" style="height:30%;width:100%;"><img
+                                src="{{url_for('static',filename='vince/images/shizhong.jpg')}}" alt="background"
+                                width="100%" height="100%"></div>
+                    </div>
+                    <div class="col-md-9 ssjc_right" style="height:100%">
+
+                        <div class="ssjc_right_up" style="height:100%">
+                            <div class="nei1" style="height:60%">
+                                <!--  桥梁简图   -->
+                                <img src="{{ url_for('static',filename='uploads/'+item.bridge) }}" alt="background"
+                                width="100%"
+                                height="100%">
+                                <!--<img src="{{url_for('static',filename='vince/images/bridge.jpg')}}" alt="background"-->
+                                     <!--width="100%"-->
+                                     <!--height="100%">-->
+                            </div>
+                            <div class="ssjc_right_bottom" style="height:40%">
+                                <div class="nei2" style="height: 100%;">
+                                    <p>工程<a id="itemid">{{item_id}}</a>数据表</p>
+                                    <div class="ssjc_rub_table" style="height: 100%;">
+                                        <table class="tj_table" border="0" style="height: 100%;">
+                                            <thead>
+                                            <tr>
+                                                <td>解调仪id</td>
+                                                <td>传感器id</td>
+                                                <td>类型</td>
+                                                <td>阈值</td>
+                                                <td>当前值</td>
+                                                <td>当前状态是否正常</td>
+                                                <td>历史值查看</td>
+                                                <td>设置</td>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            <!--行的开始-->
+                                            <tr>
+                                                <td><select class="biao_select">
+                                                    {% for v in page_data %}
+                                                    <option value={{v.device_id}}>{{ v.device_id }}</option>
+                                                    {% endfor %}
+                                                </select></td>
+                                                <td><select id="sensor" class="biao_select">
+                                                    {% for s in page_data2 %}
+                                                    <option value={{s.sensor_id}}>{{s.sensor_id}}</option>
+                                                    {% endfor %}
+                                                </select></td>
+                                                <td id="sensortype">传感器类型</td>
+                                                <td id="sensorthre">阈值</td>
+                                                <td id="sensordata">数据</td>
+                                                <td id="sensorstate">状态</td>
+                                                <td>
+                                                    <button class="chkclick">查看</button>
+                                                </td>
+                                                <td>
+                                                    <button class="shzclick">设置</button>
+                                                </td>
+                                            </tr>
+                                            <!--行的结束-->
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+            <b></b>
+        </div>
+        <strong>Copyright &copy; 2018</strong>
+    </footer>
+    <div class="control-sidebar-bg"></div>
+</div>
+<script type="text/javascript" src="{{url_for('static',filename='js/times.js')}}"></script>
+<script src="{{url_for('static',filename='plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
+<script src="{{url_for('static',filename='bootstrap/js/bootstrap.min.js')}}"></script>
+<script src="{{url_for('static',filename='dist/js/app.min.js')}}"></script>
+<script src="{{url_for('static',filename='dist/js/demo.js')}}"></script>
+<script src="{{url_for('static',filename='vince/js/nicescroll.js')}}"></script>
+<script src="{{url_for('static',filename='vince/js/demo.js')}}"></script>
+<script src="{{url_for('static',filename='vince/datapick/js/moment.js')}}"></script>
+<script src="{{url_for('static',filename='vince/datapick/js/daterangepicker.js')}}"></script>
+<script type="text/javascript">
+    // function ShowSite(str) {
+    //
+    //     var idd = str;      //传感器号
+    //     // alert(id);
+    //     var url = "/main/gczym_ssxx/" + idd + "/" + item_id + "/";
+    //     var url2 = "/main/gczym_yzcx/" + idd + "/" + item_id + "/";
+    //     $(document).ready(function () {
+    //     $.post(url, function (txt) {
+    //          alert(str);
+    //         var x = eval("(" + txt + ")");
+    //         var tdofsensortype = document.getElementById("sensortype");
+    //         tdofsensortype.innerHTML = x.sensor_type;
+    //         var tdofsensordata = document.getElementById("sensordata");
+    //         tdofsensordata.innerHTML = x.sensor_data;
+    //     });
+    //     $.post(url2, function (txt) {
+    //         var y = eval("(" + txt + ")");
+    //         var tdofsensorthre = document.getElementById("sensorthre");
+    //         tdofsensorthre.innerHTML = y.sensor_thre;
+    //     });
+    //     });
+    //     var data = document.getElementById("sensortype");
+    //     var thre = document.getElementById("shensorthre");
+    //     var state = document.getElementById("sensorstate");
+    //     if (data.innerHTML <= thre.innerHTML) {
+    //         state.innerHTML="正常";
+    //     }
+    //     else
+    //     {
+    //         state.innerHTML="异常";
+    //     }
+    // }
+
+    $(document).ready(function () {
+
+        $('#sensor').change(function () {
+
+            var idd = $(this).val();
+            var itemid = document.getElementById("itemid");
+            item_id = itemid.innerHTML;
+
+            var url = "/main/gczym_ssxx/" + idd + "/" + item_id + "/";
+            var url2 = "/main/gczym_yzcx/" + idd + "/" + item_id + "/";
+            // alert(url);
+            $.post(url, function (txt) {
+                // alert(idd);
+                var x = eval("(" + txt + ")");
+                var tdofsensortype = document.getElementById("sensortype");
+                tdofsensortype.innerHTML = x.sensor_type;
+                var tdofsensordata = document.getElementById("sensordata");
+                tdofsensordata.innerHTML = x.sensor_data;
+            });
+            $.post(url2, function (txt) {
+                var y = eval("(" + txt + ")");
+                var tdofsensorthre = document.getElementById("sensorthre");
+                tdofsensorthre.innerHTML = y.sensor_thre;
+            });
+
+
+        });
+        setInterval(refreshstate, 1000);
+
+        function refreshstate() {
+            var mid = document.getElementById("sensor");
+            var sid = mid.selectedIndex;
+            var idd2 = mid[sid].innerHTML;
+            var itemid2 = document.getElementById("itemid");
+            item_id2 = itemid2.innerHTML;
+
+            var url = "/main/gczym_ssxx/" + idd2 + "/" + item_id2 + "/";
+            $.post(url, function (txt) {
+                // alert(idd);
+                var x = eval("(" + txt + ")");
+                var tdofsensordata = document.getElementById("sensordata");
+                tdofsensordata.innerHTML = x.sensor_data;
+            });
+
+            var data = document.getElementById("sensordata");
+            var data1 = data.innerHTML;
+            var thre = document.getElementById("sensorthre");
+            var thre1 = thre.innerHTML;
+            var state = document.getElementById("sensorstate");
+            if (data1 <= thre1) {
+                state.innerHTML = "正常";
+            }
+            else {
+                state.innerHTML = "异常";
+            }
+            // alert(state.innerHTML);
+
+
+        }
+
+
+        $('.chkclick').click(function () {
+            // var item_id=$("#itemid").val();
+            var itemid = document.getElementById("itemid");
+            item_id = itemid.innerHTML;
+            // alert(item_id);
+            var sensor = document.getElementById("sensor");
+            var sensor_index = sensor.selectedIndex;
+            var sensor_id = sensor[sensor_index].value;//这三句话是获取option中的值
+            var url = "/main/sensor_history/" + sensor_id + "/" + item_id + "/";
+            window.location.href = url;
+            // alert(sensor_id);
+
+        });
+        $('.shzclick').click(function () {
+            // var item_id=$("#itemid").val();
+            var itemid = document.getElementById("itemid");
+            item_id = itemid.innerHTML;
+            // alert(item_id);
+            var sensor = document.getElementById("sensor");
+            var sensor_index = sensor.selectedIndex;
+            var sensor_id = sensor[sensor_index].value;//这三句话是获取option中的值
+            var url = "/main/item_edit/" + sensor_id + "/" + item_id + "/";
+            window.location.href = url;
+            // alert(sensor_id);
+
+        });
+
+    });
+</script>
+<script src="{{url_for('static',filename='vince/js/echarts.min.js')}}"></script>
+
+</body>
+</html>

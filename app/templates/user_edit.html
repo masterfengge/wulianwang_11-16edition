@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <div style="height:100%;width:20%">
+        <ul type="none">
+            <li style="float:left;margin-left: 5px">
+                <a href="{{ url_for('auth.indexofsupermanager') }}" style="text-decoration:none">
+						<span style="color:#FFFFFF">
+							首页
+						</span>
+                </a>
+            </li>
+            <li style="float:left;margin-left: 5px">
+                <a href="{{ url_for('main.usermanage')}}" style="text-decoration:none">
+						<span style="color:#FFFFFF">
+							用户管理
+						</span>
+                </a>
+            </li>
+            <li style="float:left;margin-left: 5px">
+                <a href="{{url_for('auth.login')}}" style="text-decoration:none">
+							<span style="color:#FFFFFF">
+								退出
+							</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <title>物联网平台主页</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}"/>
+    <script type="text/javascript" src="{{url_for('static',filename='js/jquery-1.8.0.min.js')}}"></script>
+</head>
+<body>
+<header>物联网平台<span id=localtime style=" font-size:14px; position: absolute; right: 30px; top:-20px; "></span>
+</header>
+
+<script type="text/javascript" src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/echarts.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/china.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/vue.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/map.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/times.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/DTU.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/PLC.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/online.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/industry.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/data.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='js/index.js') }}"></script>
+</body>
+</html>

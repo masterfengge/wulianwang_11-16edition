@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <div style="height:100%;width:20%">
+        <ul type="none">
+            <li style="float:left;margin-left: 5px">
+                <a href="{{ url_for('auth.indexofsupermanager',page=1) }}" style="text-decoration:none">
+						<span style="color:#FFFFFF">
+							首页 
+						</span>
+                </a>
+            </li>
+            <li style="float:left;margin-left: 5px">
+                <a href="{{ url_for('main.usermanage')}}" style="text-decoration:none">
+						<span style="color:#FFFFFF">
+							用户管理
+						</span>
+                </a>
+            </li>
+            <li style="float:left;margin-left: 5px">
+                <a href="{{url_for('auth.login')}}" style="text-decoration:none">
+							<span style="color:#FFFFFF">
+								退出
+							</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <title>物联网平台主页</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}"/>
+    <script type="text/javascript" src="{{url_for('static',filename='js/jquery-1.8.0.min.js')}}"></script>
+
+    <!--{% import "ui/iospage.html" as pg %}-->
+
+</head>
+<body>
+<header>物联网平台<span id=localtime style=" font-size:14px; position: absolute; right: 30px; top:-20px; "></span>
+</header>
+{% for msg in get_flashed_messages(category_filter=["ok"]) %}
+<div class="alert-success"
+     style="background-color:green;text-align: center;height:5%;width:80%;margin:auto;">
+    <h4>操作成功</h4>
+    <span class="pop-close1">(点此关闭)</span>
+    {{ msg }}
+</div>
+{% endfor %}
+{% for msg in get_flashed_messages(category_filter=["err"]) %}
+<div class="alert-dismissible"
+     style="background-color:red;text-align: center;height:5%;width:80%;margin:auto;">
+    <h4>操作失败</h4>
+    <span class="pop-close2">（点此关闭）</span>
+    {{ msg }}
+</div>
+{% endfor %}
+
+
+<div id="content">
+    <div class="content_center">
+
+        <div class="center_top">
+            <div class="title">平台主页</div>
+            <div class="center_top_con" id="distribution_map">
+            </div>
+        </div>
+        <div class="center_bot">
+            <div class="gongchengguanli" style="float:right;margin-right:4%">
+                <p><input type="text" placeholder="输入工程号" class="carNo_input" id="searchitem"><input type="button"
+                                                                                                     class="find_but">
+                    <button class="b1" onclick="add()">添加工程</button>
+                </p>
+                <script>
+                    function add() {
+                        window.location.href = "{{url_for('main.engineering_add')}}"
+                    }
+                </script>
+            </div>
+            <table class="panel-table" bordercolor="#0d48e0" border="1">
+                <thead bgcolor="#0e4ae0" align="center">
+                <tr height="40">
+                    <th colspan="6"> 工程项目列表</th>
+                </tr>
+                <tr>
+                    <th>工程号</th>
+                    <th>工程名称</th>
+                    <th>工程地点</th>
+                    <th>工程管理单位</th>
+                    <th>工程开始时间</th>
+                    <th>操作</th>
+                </tr>
+
+                </thead>
+                <tbody id="itemlist">
+
+                <!--静态加载数据库表格语句-->
+                {% for v in page_data.items %}
+                <tr class="aaa" style="font-size: 16px;" align="center">
+                    <td>{{v.item_id}}</td>
+                    <td>{{v.item_name}}</td>
+                    <td>{{v.item_loc}}</td>
+                    <td>{{v.item_manager}}</td>
+                    <td>{{v.item_starttime}}</td>
+                    <td width="250">
+                        <a href="{{url_for('main.engineering_edit',item_id=v.item_id)}}" class="b3"
+                           style="text-decoration:none;">编辑工程</a>
+                        <a href="{{url_for('main.gczym',item_id=v.item_id)}}" class="b2"
+                           style="text-decoration:none;">进入工程</a>
+                        <a href="{{ url_for('main.engineering_del',item_id=v.item_id) }}" class="b1"
+                           style="text-decoration:none;">删除工程</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+            <!--<div class="t_fanye">-->
+            <!--{{ pg.page(page_data,'auth.indexofsupermanager') }}-->
+            <!--</div>-->
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.pop-close1').click(function () {
+            $('.alert-success').hide();
+        });
+        $('.pop-close2').click(function () {
+            $('.alert-dismissible').hide();
+        });
+        $('.find_but').click(function () {
+            var key = $("#searchitem").val();
+            var tbody = document.getElementById("itemlist");
+            tbody.innerHTML = "";
+            var url = "/indexofsupermanager/" + key + "/search_data/";
+            $.post(url, function (txt) {
+                var x = eval("(" + txt + ")");        //此部分正常
+                var tr = document.createElement("tr"); //创建tr
+                var td_id = document.createElement("td");
+                td_id.innerHTML = x.item_id;           //此部分正常
+                tr.appendChild(td_id);
+                var td_name = document.createElement("td");
+                td_name.innerHTML = x.name;
+                tr.appendChild(td_name);
+                var td_loc = document.createElement("td");
+                td_loc.innerHTML = x.location;
+                tr.appendChild(td_loc);
+                var td_manager = document.createElement("td");
+                td_manager.innerHTML = x.manager;
+                tr.appendChild(td_manager);
+                var td_time = document.createElement("td");
+                td_time.innerHTML = x.time;
+                tr.appendChild(td_time);         //到此正常
+                var url2 = "/main/engineering_edit/" + x.item_id + "/";
+                var url3 = "/main/" + x.item_id + "/";
+                var url4 = "/main/engineering_del/" + x.item_id + "/";
+                var td_action = document.createElement("td");
+                var a = document.createElement("A");
+                a.href = url2;
+                a.innerHTML = "|修改工程|";
+                td_action.appendChild(a);
+                var b = document.createElement("A");
+                b.href = url3;
+                b.innerHTML = "|进入工程|";
+                td_action.appendChild(b);
+                var c = document.createElement("A");
+                c.href = url4;
+                c.innerHTML = "|删除工程|";
+                td_action.appendChild(c);
+                tr.appendChild(td_action);
+                tbody.appendChild(tr);
+
+            });
+
+        });
+        // setInterval(refresh, 5000);
+        //
+        // function refresh() {
+        //     var tbody = document.getElementById("itemlist");
+        //     tbody.innerHTML = " ";
+        // var v ;
+        // for (v in page_data.items) {
+        // var j = itemnum+1;
+        // alert(j);
+        // for (var i = 1; i < 4; i++) {
+        //     var url = "/indexofsupermanager/" + i + "/refresh_data/";  //必须先定义url,否则i的值无法传入到post中
+        //
+        //     $.post(url, function (txt) {
+        //         var x = eval("(" + txt + ")");        //此部分正常
+        //         var tr = document.createElement("tr"); //创建tr
+        //         var td_id = document.createElement("td");
+        //         td_id.innerHTML = x.item_id;           //此部分正常
+        //         tr.appendChild(td_id);
+        //         var td_name = document.createElement("td");
+        //         td_name.innerHTML = x.name;
+        //         tr.appendChild(td_name);
+        //         var td_loc = document.createElement("td");
+        //         td_loc.innerHTML = x.location;
+        //         tr.appendChild(td_loc);
+        //         var td_manager = document.createElement("td");
+        //         td_manager.innerHTML = x.manager;
+        //         tr.appendChild(td_manager);
+        //         var td_time = document.createElement("td");
+        //         td_time.innerHTML = x.time;
+        //         tr.appendChild(td_time);         //到此正常
+        //         var url2= "/main/engineering_edit/"+ x.item_id +"/";
+        //         var td_action = document.createElement("td");
+        //         var a = document.createElement("A");
+        //         tr.appendChild(td_action);
+        //         a.href = url2;
+        //         a.innerHTML = "修改工程";
+        //         td_action.appendChild(a);
+        //         tbody.appendChild(tr);
+        //
+        //     });
+        // }
+
+        // }
+
+    });
+
+
+</script>
+
+<script type="text/javascript" src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/echarts.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/china.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/vue.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/map.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/times.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/DTU.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/PLC.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/online.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/industry.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/data.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='js/index.js') }}"></script>
+</body>
+</html>
+
